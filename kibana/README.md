@@ -1,5 +1,5 @@
 # Kibana Dockerfile
-This build made for Linux aarch64. For another platform you have to change tar url on kibana.sh
+This build is for Linux aarch64
 # How to
 ## Build image
 `docker build -t kibana:8.1.2 .`
