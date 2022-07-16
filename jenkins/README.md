@@ -1,20 +1,8 @@
-# jenkins-docker
-Jenkins в docker контейнере. Образ основан на последней стабильной Ubuntu с OpenJDK 8.
-
-Убедитесь, что скрипты исполняемые \
-`sudo chmod 755 build.sh` \
-`sudo chmod 755 run.sh`
-
-При сборке загружается последняя версия Jenkins с официального сайта. \
-`./build.sh #сборка образа`
-
-Контейнер запускается с прикрепленным volume. Вам необходимо создать volume до первого запуска. 
-Volume - это домашний каталог Jenkis. Вы можете мигрировать туда свой предыдущий Jenkins или оставить пустым, Jenkins сам создаст необходимые файлы. 
-Volume необходим для постоянного хранения настроек и приватных файлов и ключей. \
-`docker volume create jenkins-data  #создать volume` \
-`docker volume inspect jenkins-data #расположение volume`
-
-Запуск контейнера убъет предыдущий инстанс и удалит его, если он существовал. \
-`./run.sh #запуск контейнера`
-
-Интерфейс Jenkins доступен по URL http://127.0.0.1:8080
+# Jenkins Dockerfile
+Jenkins: latest
+Java: openjdk-11-jre-headless
+# How to
+## Build image
+`docker build -t jenkins:latest .`
+## Run container
+`docker run --mount type=volume,source=jenkins-data,destination=/root -d -p 8080:8080 -p 50000:50000 jenkins:latest`
