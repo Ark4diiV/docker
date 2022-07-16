@@ -6,4 +6,4 @@ This build is for Linux aarch64
 ## Run container
 `docker run -d -p 5601:5601 kibana:8.1.2`
 ## Run container with custom public base url
-`docker run -d -e publicBaseUrl=http://kibana.domain.com -p 5601:5601 kibana:8.1.2`
+`docker run -d -e publicBaseUrl=http://kibana.domain.com -p 5601:5601 kibana:8.1.2` 
