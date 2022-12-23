@@ -22,7 +22,7 @@ do
       output_dir=${OPTARG}
       ;;
     \?) #If no options
-      echo "Error: Invalid option -$OPTARG" >&2
+      echo "Error: Invalid option -"${OPTARG}"" >&2
       exit 1
       ;;
   esac
@@ -31,7 +31,7 @@ done
 #If options without arguments
 [ -z ${file_list} ] || [ -z ${output_dir} ] && echo "Error: Required argument(s) not provided" >&2 && exit 1
 
-mkdir $output_dir
+mkdir ${output_dir}
 
 list=$(cat ${file_list}) #Images
 
@@ -42,4 +42,4 @@ do
 	filename=$(echo "$image" | sed 's/.*\/\([^:]*\).*/\1/')_$(echo "$image" | sed 's/.*:\(.*\)/\1/') #Create file name for image from image name and tag
 	docker save ${n} -o ${output_dir}/${filename}.tar #Save image to tar
 done
-tar cvzf $output_dir.tar.gz $output_dir #Gzip everything
+tar cvzf ${output_dir}.tar.gz ${output_dir} #Gzip everything
