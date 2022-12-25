@@ -2,28 +2,30 @@
 #This script made for macos apple silicon. 
 #For cases that require download and save linux/amd64 Docker image on ARM M1 platform.
 
-while getopts "hl:d:" opt
+# Help
+case "$1" in
+  "-h")
+    echo "Usage: ./docker_image_downloader.sh -l <list>... -d <dir>...
+
+Options:
+  -l      ip address of client
+  -d      Dir where images have to be saved
+  -h      display this help message
+
+Examples:
+  ./docker_image_downloader.sh -l list_images -d ceph_images"
+    exit 0
+    ;;
+esac
+
+while getopts "l:d:" opt
 do
   case "$opt" in
-    h) #Show help
-      echo ""
-      echo "Usage: ./docker_image_downloader.sh -l [list] -d [dir]"
-      echo ""
-      echo "Docker image downloader for linux/amd64 platform"
-      echo ""
-      echo "  -l File name with docker images"
-      echo "  -d Dir where images have to be saved"
-      exit 0
-      ;;
-    l) #Pass file with list of Docker images
-      file_list=${OPTARG}
-      ;;
-    d) #Output dir
-      output_dir=${OPTARG}
-      ;;
+    l) file_list=${OPTARG};; #Pass file with list of Docker images
+    d) output_dir=${OPTARG};; #Output dir
     \?) #If no options
-      echo "Error: Invalid option -"${OPTARG}"" >&2
-      exit 1
+      echo "Error: Invalid option -"${OPTARG}"" >&2 
+      exit 1 
       ;;
   esac
 done
