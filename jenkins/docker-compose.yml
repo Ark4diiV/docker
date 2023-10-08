@@ -1,0 +1,22 @@
+version: "3.5"
+
+# networks:
+#   jenkins_network:
+#     external: true
+#     name: jenkins_network
+
+services:
+  jenkins:
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    image: jenkins/jenkins:lts-jdk11
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:
